@@ -1,7 +1,7 @@
 plugins {
     id 'war'
     id 'java'
-    id 'org.gretty' version '3.0.5'
+    id 'org.gretty' version '3.0.6'
 
 }
 
@@ -21,6 +21,7 @@ dependencies {
     implementation group: 'org.apache.commons',
             name: 'commons-lang3',
             version: commonsVersion
+
 
 }
 
