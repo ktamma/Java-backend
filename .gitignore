@@ -48,4 +48,13 @@ Thumbs.db
 *.mov
 *.wmv
 
+.idea
+*.iml
 
+!/gradle/wrapper/gradle-wrapper.jar
+
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
