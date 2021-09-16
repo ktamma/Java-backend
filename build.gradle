@@ -21,7 +21,8 @@ dependencies {
     implementation group: 'org.apache.commons',
             name: 'commons-lang3',
             version: commonsVersion
-
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
 }
 

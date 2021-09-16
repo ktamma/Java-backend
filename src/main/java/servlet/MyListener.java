@@ -1,31 +1,36 @@
 package servlet;
 
-import order.Order;
+
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.servlet.ServletRegistration;
 import javax.servlet.annotation.WebListener;
 
 @WebListener
 public class MyListener implements ServletContextListener {
 
-    private long id = 0;
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
 
         ServletContext context = sce.getServletContext();
-        id += 1;
-/*        Order order = new Order();
-        order.setTitle("from context");
 
-        context.setAttribute("id", post);*/
+        OrdersServlet servlet = new OrdersServlet();
+
+        ServletRegistration reg = context.addServlet("orderServlet", servlet);
+
+        reg.addMapping("/api/orders");
+
+
+
+
     }
+
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        System.out.println("Closed....");
     }
 }
 

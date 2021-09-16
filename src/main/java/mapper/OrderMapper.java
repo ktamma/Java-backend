@@ -3,11 +3,9 @@ package mapper;
 import order.Order;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class OrderMapper {
 
@@ -32,11 +30,10 @@ public class OrderMapper {
 
     public Order parse(String input) {
         Map<String, String> map = getStringStringMap(input);
-
-        Order outPut = new Order(0,
-                map.get("orderNumber")
-        );
-        return outPut;
+        return Order.builder()
+                .id(0)
+                .orderNumber(map.get("orderNumber"))
+                .build();
 
     }
 
@@ -56,20 +53,10 @@ public class OrderMapper {
     }
 
     public String stringify(Order order) {
-        /*StringBuilder pair = new StringBuilder("");
+
         Map<String, String> map = new LinkedHashMap<>();
-        map.put("firstName", person.getFirstName());
-        map.put("lastName", person.getLastName());
-        map.put("age", String.valueOf(person.getAge()));
-        for (Map.Entry<String, String> entry : map.entrySet()) {
-            pair.append(String.format("\"%s\":\"%s\"",
-                    entry.getKey(), entry.getValue()));
-        }
-        return pair.toString();
-*/
-        Map<String, String> map = new LinkedHashMap<>();
-        map.put("id", String.valueOf(Long.valueOf(order.id)));
-        map.put("orderNumber", order.orderNumber);
+        map.put("id", String.valueOf(Long.valueOf(order.getId())));
+        map.put("orderNumber", order.getOrderNumber());
 
 
         String pairs = map.entrySet()

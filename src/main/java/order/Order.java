@@ -1,14 +1,18 @@
 package order;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Order {
-
-    public long id;
-    public String orderNumber;
-
-    public Order(long id, String orderNumber) {
-        this.id = id;
-        this.orderNumber = orderNumber;
-    }
+    private long id;
+    private String orderNumber;
 
 
 }
