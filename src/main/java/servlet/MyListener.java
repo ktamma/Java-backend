@@ -24,6 +24,17 @@ public class MyListener implements ServletContextListener {
         reg.addMapping("/api/orders");
 
 
+        FormServlet formServlet = new FormServlet();
+
+        ServletRegistration regForm = context.addServlet("formServlet", formServlet);
+
+        regForm.addMapping("/orders/form");
+
+
+        context.setAttribute("id", new Id());
+
+
+
 
 
     }
