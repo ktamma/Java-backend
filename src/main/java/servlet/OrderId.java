@@ -1,8 +1,8 @@
 package servlet;
 
-public class Id {
+public class OrderId {
     private Long id = 0L;
-    public Long Increase(){
+    public Long increase(){
         id++;
         return id;
     }

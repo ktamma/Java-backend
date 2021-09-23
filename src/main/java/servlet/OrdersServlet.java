@@ -2,7 +2,6 @@
 package servlet;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import mapper.OrderMapper;
 import order.Order;
 import util.Util;
 
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class OrdersServlet extends HttpServlet {
-    private long id = 0;
 
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -30,15 +28,20 @@ public class OrdersServlet extends HttpServlet {
                           HttpServletResponse response) throws IOException {
 
 
+
+
+        ServletContext context = getServletContext();
+        OrderId orderId = (OrderId) context.getAttribute("id");
+
         String json = Util.readStream(request.getInputStream());
 
 
         Order order = new ObjectMapper().readValue(json, Order.class);
-        order.setId(id++);
+        order.setId(orderId.increase());
 
-        ServletContext context = getServletContext();
-        System.out.println("" + order.getId());
         context.setAttribute("" + order.getId(), order);
+
+        context.setAttribute("id", orderId);
 
         response.setContentType("application/json");
 

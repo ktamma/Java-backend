@@ -31,7 +31,7 @@ public class MyListener implements ServletContextListener {
         regForm.addMapping("/orders/form");
 
 
-        context.setAttribute("id", new Id());
+        context.setAttribute("id", new OrderId());
 
 
 

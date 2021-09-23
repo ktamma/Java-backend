@@ -1,11 +1,8 @@
 package servlet;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import order.Order;
-import util.Util;
 
 import javax.servlet.ServletContext;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +10,6 @@ import java.io.IOException;
 
 public class FormServlet extends HttpServlet {
 
-    private long id = 0;
     @Override
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response)
@@ -27,14 +23,18 @@ public class FormServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws IOException {
-        Order order = new Order();
-        order.setId(id++);
-        order.setOrderNumber(request.getParameter("orderNumber"));
+
 
         ServletContext context = getServletContext();
-        System.out.println("" + order.getId());
+
+        OrderId orderId = (OrderId) context.getAttribute("id");
+
+        Order order = new Order();
+        order.setId(orderId.increase());
+        order.setOrderNumber(request.getParameter("orderNumber"));
         context.setAttribute("" + order.getId(), order);
 
+        context.setAttribute("id", orderId);
 
 
         response.setContentType("text/plain");
