@@ -1,6 +1,6 @@
 package servlet;
 
-
+import order.Order;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -8,12 +8,26 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.ServletRegistration;
 import javax.servlet.annotation.WebListener;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import static dao.CreateDatabase.createSchema;
+
+
 @WebListener
 public class MyListener implements ServletContextListener {
 
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
+
+        try {
+            createSchema();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
 
         ServletContext context = sce.getServletContext();
 
@@ -30,8 +44,8 @@ public class MyListener implements ServletContextListener {
 
         regForm.addMapping("/orders/form");
 
-
-        context.setAttribute("id", new OrderId());
+        List<Order> orders = new ArrayList<>();
+        context.setAttribute("orders", orders);
 
 
 

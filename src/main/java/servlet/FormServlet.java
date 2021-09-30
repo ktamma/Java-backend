@@ -1,6 +1,8 @@
 package servlet;
 
+import dao.OrderDao;
 import order.Order;
+import util.ConfigUtil;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
@@ -24,17 +26,15 @@ public class FormServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws IOException {
 
+        OrderDao orderDao = new OrderDao(ConfigUtil.readConnectionInfo());
 
         ServletContext context = getServletContext();
 
-        OrderId orderId = (OrderId) context.getAttribute("id");
 
         Order order = new Order();
-        order.setId(orderId.increase());
         order.setOrderNumber(request.getParameter("orderNumber"));
+        order.setId(orderDao.insertOrder(order).getId());
         context.setAttribute("" + order.getId(), order);
-
-        context.setAttribute("id", orderId);
 
 
         response.setContentType("text/plain");

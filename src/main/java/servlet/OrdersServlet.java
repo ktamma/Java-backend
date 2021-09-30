@@ -2,10 +2,14 @@
 package servlet;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import dao.OrderDao;
 import order.Order;
+import util.ConfigUtil;
 import util.Util;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,11 +20,21 @@ public class OrdersServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("application/json");
+        String id = request.getParameter("id");
         ServletContext context = getServletContext();
-        Order order = (Order) context.getAttribute(request.getParameter("id"));
-        ObjectMapper objectMapper = new ObjectMapper();
+        if (id == null){
+            List <Order> orders = (ArrayList<Order>) context.getAttribute("orders");
+            ObjectMapper objectMapper = new ObjectMapper();
 
-        response.getWriter().print(objectMapper.writeValueAsString(order));
+            response.getWriter().print(objectMapper.writeValueAsString(orders));
+
+        }
+        else {
+            Order order = (Order) context.getAttribute(id);
+            ObjectMapper objectMapper = new ObjectMapper();
+
+            response.getWriter().print(objectMapper.writeValueAsString(order));
+        }
     }
 
     @Override
@@ -28,37 +42,29 @@ public class OrdersServlet extends HttpServlet {
                           HttpServletResponse response) throws IOException {
 
 
+        OrderDao orderDao = new OrderDao(ConfigUtil.readConnectionInfo());
 
 
         ServletContext context = getServletContext();
-        OrderId orderId = (OrderId) context.getAttribute("id");
 
         String json = Util.readStream(request.getInputStream());
 
+        List<Order> orders = (ArrayList<Order>) context.getAttribute("orders");
+
 
         Order order = new ObjectMapper().readValue(json, Order.class);
-        order.setId(orderId.increase());
+        order.setId(orderDao.insertOrder(order).getId());
 
         context.setAttribute("" + order.getId(), order);
 
-        context.setAttribute("id", orderId);
+        orders.add(order);
+
+        context.setAttribute("orders" , orders);
+
 
         response.setContentType("application/json");
 
         response.getWriter().print(new ObjectMapper().writeValueAsString(order));
 
-//        OrderMapper mapper = new OrderMapper();
-//
-//        Order order = mapper.parse(json);
-//
-//        order.setId(id++);
-//
-//        ServletContext context = getServletContext();
-//        System.out.println(""+order.getId());
-//        context.setAttribute("" + order.getId(), order);
-//
-//
-//        response.setContentType("application/json");
-//        response.getWriter().println(mapper.stringify(order));
     }
 }
