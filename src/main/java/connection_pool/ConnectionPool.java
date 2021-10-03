@@ -11,7 +11,8 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -24,7 +25,8 @@ public class ConnectionPool {
     private String driverClass;
     private int size;
 
-    private LinkedList<Connection> pool = new LinkedList<>();
+    private List<Connection> pool = new ArrayList<>();
+
 
 
     public int getActive() {
@@ -65,7 +67,7 @@ public class ConnectionPool {
                         //Determine whether it is the close method to recover the connection
                         if (method.getName().equals("close")) {
                             synchronized (pool) {
-                                pool.addLast((Connection) proxy);
+                                pool.add((Connection) proxy);
                                 pool.notify();
                                 return null;
                             }
@@ -87,7 +89,7 @@ public class ConnectionPool {
                     throw new RuntimeException(e);
                 }
             }
-            return pool.removeFirst();
+            return pool.remove(pool.size() - 1);
         }
     }
 }
