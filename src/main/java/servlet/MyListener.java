@@ -1,5 +1,7 @@
 package servlet;
 
+import connectionPool.ConnectionPool;
+import connectionPool.ConnectionPoolFactory;
 import order.Order;
 
 import javax.servlet.ServletContext;
@@ -43,6 +45,24 @@ public class MyListener implements ServletContextListener {
         ServletRegistration regForm = context.addServlet("formServlet", formServlet);
 
         regForm.addMapping("/orders/form");
+
+
+        SlowOrdersSerlvet slowServlet = new SlowOrdersSerlvet();
+
+        ServletRegistration regSlow = context.addServlet("SlowOrderServlet", slowServlet);
+
+        regSlow.addMapping("/api/orders/slow");
+
+
+
+        PoolInfoServlet poolInfo = new PoolInfoServlet();
+
+        ServletRegistration regPoolInfo = context.addServlet("poolInfoServlet", poolInfo);
+
+        regPoolInfo.addMapping("/api/pool/info");
+
+        ConnectionPool pool = new ConnectionPoolFactory().createConnectionPool();
+        context.setAttribute("ConnectionPool", pool);
 
         List<Order> orders = new ArrayList<>();
         context.setAttribute("orders", orders);

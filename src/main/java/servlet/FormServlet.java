@@ -1,5 +1,6 @@
 package servlet;
 
+import connectionPool.ConnectionPool;
 import dao.OrderDao;
 import order.Order;
 import util.ConfigUtil;
@@ -26,9 +27,12 @@ public class FormServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws IOException {
 
-        OrderDao orderDao = new OrderDao(ConfigUtil.readConnectionInfo());
 
         ServletContext context = getServletContext();
+
+        ConnectionPool pool =(ConnectionPool) context.getAttribute("ConnectionPool");
+
+        OrderDao orderDao = new OrderDao(pool);
 
 
         Order order = new Order();

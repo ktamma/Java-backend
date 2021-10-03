@@ -2,6 +2,7 @@
 package servlet;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import connectionPool.ConnectionPool;
 import dao.OrderDao;
 import order.Order;
 import util.ConfigUtil;
@@ -22,6 +23,12 @@ public class OrdersServlet extends HttpServlet {
         response.setContentType("application/json");
         String id = request.getParameter("id");
         ServletContext context = getServletContext();
+
+
+        ConnectionPool pool =(ConnectionPool) context.getAttribute("ConnectionPool");
+        OrderDao orderDao = new OrderDao(pool);
+        Order order1 = orderDao.findOrderById2(0L);
+
         if (id == null){
             List <Order> orders = (ArrayList<Order>) context.getAttribute("orders");
             ObjectMapper objectMapper = new ObjectMapper();
@@ -42,10 +49,11 @@ public class OrdersServlet extends HttpServlet {
                           HttpServletResponse response) throws IOException {
 
 
-        OrderDao orderDao = new OrderDao(ConfigUtil.readConnectionInfo());
-
-
         ServletContext context = getServletContext();
+
+        ConnectionPool pool =(ConnectionPool) context.getAttribute("ConnectionPool");
+
+        OrderDao orderDao = new OrderDao(pool);
 
         String json = Util.readStream(request.getInputStream());
 

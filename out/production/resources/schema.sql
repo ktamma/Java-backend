@@ -2,7 +2,7 @@ drop table if exists "order";
 --
 -- drop table if exists item;
 --
--- drop sequence if exists orderId;
+drop sequence if exists orderId;
 -- drop sequence if exists itemId;
 --
 --
@@ -24,5 +24,4 @@ CREATE TABLE "order"
 --     name     varchar(255) NOT NULL,
 --     quantity bigint       NOT NULL,
 --     price    bigint       not null
---
 -- );
