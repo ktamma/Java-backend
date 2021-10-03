@@ -9,12 +9,15 @@ import java.util.List;
 
 public class OrderDao {
 
+    private static final String ORDER_NUMBER = "orderNumber";
+
 
     private final ConnectionPool pool;
 
     public OrderDao(ConnectionPool pool) {
         this.pool = pool;
     }
+
 
     public Order findOrderById(Long id) {
 
@@ -31,7 +34,7 @@ public class OrderDao {
 
             if (rs.next()) {
                 order.setId(rs.getLong("id"));
-                order.setOrderNumber(rs.getString("orderNumber"));
+                order.setOrderNumber(rs.getString(ORDER_NUMBER));
                 return order;
             }
             return null;
@@ -54,7 +57,7 @@ public class OrderDao {
             while (rs.next()) {
                 Order order = new Order();
                 order.setId(rs.getLong("id"));
-                order.setOrderNumber(rs.getString("orderNumber"));
+                order.setOrderNumber(rs.getString(ORDER_NUMBER));
                 orders.add(order);
             }
             return orders;
@@ -83,7 +86,7 @@ public class OrderDao {
 
             if (rs.next()) {
                 order.setId(rs.getLong("id"));
-                order.setOrderNumber(rs.getString("orderNumber"));
+                order.setOrderNumber(rs.getString(ORDER_NUMBER));
                 return order;
             }
             return null;
@@ -133,7 +136,7 @@ public class OrderDao {
             while (rs.next()) {
                 Order order = new Order();
                 order.setId(rs.getLong("id"));
-                order.setOrderNumber(rs.getString("orderNumber"));
+                order.setOrderNumber(rs.getString(ORDER_NUMBER));
                 orders.add(order);
             }
             return orders;

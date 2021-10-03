@@ -57,10 +57,9 @@ public class ConnectionPool {
     }
 
     private Object getProxy(Connection conn) {
-        Object connProxy = Proxy.newProxyInstance(ConnectionPool.class.getClassLoader(),
+        return Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(),
                 new Class[]{Connection.class},
                 new InvocationHandler() {
-
                     @Override
                     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                         //Determine whether it is the close method to recover the connection
@@ -76,7 +75,6 @@ public class ConnectionPool {
                         }
                     }
                 });
-        return connProxy;
     }
 
     public Connection getConnection() {
