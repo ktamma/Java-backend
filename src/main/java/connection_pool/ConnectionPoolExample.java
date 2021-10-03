@@ -1,7 +1,6 @@
-package connectionPool;
+package connection_pool;
 
 
-import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 

@@ -1,10 +1,7 @@
-package connectionPool;
+package connection_pool;
 
 import util.ConfigUtil;
 import util.ConnectionInfo;
-
-import javax.sql.DataSource;
-import java.sql.SQLException;
 
 public class ConnectionPoolFactory {
 

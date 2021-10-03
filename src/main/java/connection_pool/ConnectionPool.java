@@ -1,11 +1,10 @@
-package connectionPool;
+package connection_pool;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import util.ConfigUtil;
-import util.ConnectionInfo;
+
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -13,7 +12,6 @@ import java.lang.reflect.Proxy;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.LinkedList;
-import java.util.Properties;
 
 @Data
 @AllArgsConstructor
@@ -39,7 +37,6 @@ public class ConnectionPool {
 
     public void createPool() {
         try {
-            Properties properties = new Properties();
 
             Class.forName(driverClass);
             for (int i = 0; i < size; i++) {
@@ -55,7 +52,6 @@ public class ConnectionPool {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
@@ -85,17 +81,15 @@ public class ConnectionPool {
 
     public Connection getConnection() {
         synchronized (pool) {
-            if (pool.size() == 0) {
+            if (pool.isEmpty()) {
 
                 try {
                     pool.wait();
                 } catch (Exception e) {
-                    e.printStackTrace();
                     throw new RuntimeException(e);
                 }
             }
-            Connection connection = pool.removeFirst();
-            return connection;
+            return pool.removeFirst();
         }
     }
 }

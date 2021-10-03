@@ -9,7 +9,7 @@
         <Root level="WARN">
             <AppenderRef ref="Console"/>
         </Root>
-        <Logger name="connectionPool" level="debug" additivity="false">
+        <Logger name="connection_pool" level="debug" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
     </Loggers>

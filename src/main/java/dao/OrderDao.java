@@ -1,10 +1,11 @@
 package dao;
 
-import connectionPool.ConnectionPool;
+import connection_pool.ConnectionPool;
 import order.Order;
-import util.ConnectionInfo;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderDao {
 
@@ -15,14 +16,12 @@ public class OrderDao {
         this.pool = pool;
     }
 
-    public Order findOrderById2(Long id) {
+    public Order findOrderById(Long id) {
 
         String sql = "select id, orderNumber from \"order\" where id =?";
 
         try (Connection conn = pool.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-
-
 
 
             ps.setLong(1, id);
@@ -42,8 +41,31 @@ public class OrderDao {
         }
     }
 
+    public List<Order> getOrders() {
+        String sql = "select id, orderNumber from \"order\"";
 
-    public Order findOrderById(Long id) {
+        try (Connection conn = pool.getConnection();
+             Statement stmt = conn.createStatement()) {
+
+            ResultSet rs = stmt.executeQuery(sql);
+
+
+            ArrayList<Order> orders = new ArrayList<>();
+            while (rs.next()) {
+                Order order = new Order();
+                order.setId(rs.getLong("id"));
+                order.setOrderNumber(rs.getString("orderNumber"));
+                orders.add(order);
+            }
+            return orders;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public Order findOrderByIdSlow(Long id) {
 
         String sql = "select id, orderNumber from \"order\" where id =?";
 
@@ -71,23 +93,6 @@ public class OrderDao {
         }
     }
 
-    public Order findPersonById(Long id) {
-        String s = "select id, name, age from person where id = ?";
-        try (Connection conn = pool.getConnection();
-             PreparedStatement ps = conn.prepareStatement(s)) {
-
-            ps.setLong(1, id);
-
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                return new Order();
-            }
-            return null;
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public Order insertOrder(Order order) {
 
@@ -113,5 +118,28 @@ public class OrderDao {
         }
     }
 
+    public List<Order> getOrdersSlow() {
+        String sql = "select id, orderNumber from \"order\"";
 
+        try (Connection conn = pool.getConnection();
+             Statement stmt = conn.createStatement()) {
+
+            Thread.sleep(1000);
+
+            ResultSet rs = stmt.executeQuery(sql);
+
+
+            ArrayList<Order> orders = new ArrayList<>();
+            while (rs.next()) {
+                Order order = new Order();
+                order.setId(rs.getLong("id"));
+                order.setOrderNumber(rs.getString("orderNumber"));
+                orders.add(order);
+            }
+            return orders;
+
+        } catch (SQLException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

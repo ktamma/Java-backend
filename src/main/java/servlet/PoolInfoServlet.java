@@ -1,8 +1,7 @@
 package servlet;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import connectionPool.ConnectionPool;
-import dao.OrderDao;
+import connection_pool.ConnectionPool;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;

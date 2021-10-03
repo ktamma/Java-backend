@@ -1,9 +1,8 @@
 package servlet;
 
-import connectionPool.ConnectionPool;
+import connection_pool.ConnectionPool;
 import dao.OrderDao;
 import order.Order;
-import util.ConfigUtil;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;

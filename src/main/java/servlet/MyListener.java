@@ -1,7 +1,7 @@
 package servlet;
 
-import connectionPool.ConnectionPool;
-import connectionPool.ConnectionPoolFactory;
+import connection_pool.ConnectionPool;
+import connection_pool.ConnectionPoolFactory;
 import order.Order;
 
 import javax.servlet.ServletContext;
