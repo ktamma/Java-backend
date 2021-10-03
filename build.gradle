@@ -18,6 +18,10 @@ dependencies {
             name: 'postgresql',
             version: '42.2.23'
 
+    implementation group: 'org.hsqldb',
+            name: 'hsqldb',
+            version: '2.6.0'
+
 
     implementation 'com.konghq:unirest-objectmapper-jackson:3.13.0'
     testImplementation 'junit:junit:4.11'

@@ -37,8 +37,6 @@ public class FormServlet extends HttpServlet {
         Order order = new Order();
         order.setOrderNumber(request.getParameter("orderNumber"));
         order.setId(orderDao.insertOrder(order).getId());
-        context.setAttribute("" + order.getId(), order);
-
 
         response.setContentType("text/plain");
 

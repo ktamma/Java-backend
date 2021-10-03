@@ -2,7 +2,6 @@ package servlet;
 
 import connection_pool.ConnectionPool;
 import connection_pool.ConnectionPoolFactory;
-import order.Order;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -11,8 +10,7 @@ import javax.servlet.ServletRegistration;
 import javax.servlet.annotation.WebListener;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import static dao.CreateDatabase.createSchema;
 
@@ -26,7 +24,7 @@ public class MyListener implements ServletContextListener {
 
         try {
             createSchema();
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 
@@ -63,11 +61,6 @@ public class MyListener implements ServletContextListener {
 
         ConnectionPool pool = new ConnectionPoolFactory().createConnectionPool();
         context.setAttribute("ConnectionPool", pool);
-
-        List<Order> orders = new ArrayList<>();
-        context.setAttribute("orders", orders);
-
-
 
 
 

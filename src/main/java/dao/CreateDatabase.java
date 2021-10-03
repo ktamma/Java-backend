@@ -14,16 +14,20 @@ import java.sql.Statement;
 public class CreateDatabase
 {
     private static Connection getConnection(ConnectionInfo connectionInfo) throws SQLException {
+
         return DriverManager.getConnection(
                 connectionInfo.getUrl(),
                 connectionInfo.getUser(),
                 connectionInfo.getPass());
     }
 
-    public static void createSchema() throws SQLException {
+    public static void createSchema() throws SQLException, ClassNotFoundException {
         ConnectionInfo connectionInfo = ConfigUtil.readConnectionInfo();
+        Class.forName("org.postgresql.Driver");
 
         Connection conn = getConnection(connectionInfo);
+
+
 
         try (conn; Statement stmt = conn.createStatement()) {
 

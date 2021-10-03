@@ -7,7 +7,6 @@ import order.Order;
 import util.Util;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
@@ -51,17 +50,11 @@ public class OrdersServlet extends HttpServlet {
 
         String json = Util.readStream(request.getInputStream());
 
-        List<Order> orders = (ArrayList<Order>) context.getAttribute("orders");
 
 
         Order order = new ObjectMapper().readValue(json, Order.class);
         order.setId(orderDao.insertOrder(order).getId());
 
-        context.setAttribute("" + order.getId(), order);
-
-        orders.add(order);
-
-        context.setAttribute("orders" , orders);
 
 
         response.setContentType("application/json");
