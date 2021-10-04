@@ -64,6 +64,16 @@ public class MyListener implements ServletContextListener {
 
 
 
+        BulkOrdersServlet bulkOrdersServlet = new BulkOrdersServlet();
+
+        ServletRegistration regBulkOrdersServlet = context.addServlet("bulkOrdersServlet", bulkOrdersServlet);
+
+        regBulkOrdersServlet.addMapping("/api/orders/bulk");
+
+
+
+
+
     }
 
 

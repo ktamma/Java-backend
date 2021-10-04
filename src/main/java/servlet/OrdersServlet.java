@@ -9,6 +9,7 @@ import util.Util;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -60,6 +61,20 @@ public class OrdersServlet extends HttpServlet {
         response.setContentType("application/json");
 
         response.getWriter().print(new ObjectMapper().writeValueAsString(order));
+
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ServletContext context = getServletContext();
+
+        ConnectionPool pool =(ConnectionPool) context.getAttribute("ConnectionPool");
+
+        OrderDao orderDao = new OrderDao(pool);
+
+        String id = req.getParameter("id");
+
+        orderDao.deleteById(Long.parseLong(id));
 
     }
 }

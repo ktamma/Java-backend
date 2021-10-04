@@ -1,18 +1,25 @@
 package order;
 
 import item.Item;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.util.List;
 
+@EqualsAndHashCode
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class Order {
     private long id;
+    @EqualsAndHashCode.Exclude
     private String orderNumber;
-    private Item[] orderRows;
+    @EqualsAndHashCode.Exclude
+    private List<Item> orderRows;
+
+    public void addItem(Item item){
+        if (item != null){
+            orderRows.add(item);
+        }
+    }
 }
