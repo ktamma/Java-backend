@@ -36,17 +36,19 @@ public class OrderDao {
             if (rs.next()) {
                 order.setId(rs.getLong("id"));
                 order.setOrderNumber(rs.getString(ORDER_NUMBER));
-                Item item1 = new Item();
-                item1.setItemName(rs.getString("itemName"));
-                item1.setPrice(rs.getInt("price"));
-                item1.setQuantity(rs.getInt("quantity"));
+                Item item1 = Item.builder()
+                        .itemName(rs.getString("itemName"))
+                        .price(rs.getInt("price"))
+                        .quantity(rs.getInt("quantity"))
+                        .build();
                 order.setOrderRows(new ArrayList<>());
                 order.addItem(item1);
                 while (rs.next()) {
-                    Item item = new Item();
-                    item.setItemName(rs.getString("itemName"));
-                    item.setPrice(rs.getInt("price"));
-                    item.setQuantity(rs.getInt("quantity"));
+                    Item item = Item.builder()
+                            .itemName(rs.getString("itemName"))
+                            .price(rs.getInt("price"))
+                            .quantity(rs.getInt("quantity"))
+                            .build();
                     order.addItem(item);
                 }
                 return order;
@@ -75,10 +77,11 @@ public class OrderDao {
                 Order order = new Order();
                 order.setId(rs.getLong("id"));
                 order.setOrderNumber(rs.getString(ORDER_NUMBER));
-                Item item = new Item();
-                item.setItemName(rs.getString("itemName"));
-                item.setPrice(rs.getInt("price"));
-                item.setQuantity(rs.getInt("quantity"));
+                Item item = Item.builder()
+                        .itemName(rs.getString("itemName"))
+                        .price(rs.getInt("price"))
+                        .quantity(rs.getInt("quantity"))
+                        .build();
                 if (orders.contains(order)) {
                     orders.get(orders.size() - 1).addItem(item);
                 } else {
@@ -101,10 +104,7 @@ public class OrderDao {
 
         try (Connection conn = pool.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-
-
             Thread.sleep(1000);
-
 
             ps.setLong(1, id);
 

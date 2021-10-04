@@ -25,6 +25,7 @@ public class ConnectionPool {
     private String driverClass;
     private int size;
 
+    @Builder.Default
     private List<Connection> pool = new ArrayList<>();
 
 
