@@ -25,32 +25,4 @@ CREATE TABLE items
     FOREIGN KEY (orderId) REFERENCES orders(id)
 );
 
-insert into orders(orderNumber) VALUES ('ABC');
-insert into orders(orderNumber) VALUES ('Bca');
-insert into orders(orderNumber) VALUES ('123');
-insert into orders(orderNumber) VALUES ('wqewqABC');
-insert into orders(orderNumber) VALUES ('ArfqetBC');
-
-
-insert into items(orderId, itemName, quantity, price) VALUES (1,'cpu', 123, 10);
-insert into items(orderId, itemName, quantity, price) VALUES (2,'cpu', 123, 10);
-insert into items(orderId, itemName, quantity, price) VALUES (3,'cpu', 123, 10);
-insert into items(orderId, itemName, quantity, price) VALUES (1,'Motherboard', 123, 10);
-insert into items(orderId, itemName, quantity, price) VALUES (1,'Monitor', 123, 10);
-insert into items(orderId, itemName, quantity, price) VALUES (1,'RAM', 123, 10);
-SELECT orders.id, orders.orderNumber, items.itemName, items.quantity, items.price, items.orderId
-                FROM orders
-                LEFT JOIN items ON orders.id = items.orderId order by 1;
-/*select orders.id, orders.orderNumber, items.itemName, items.quantity, items.price from orders, items
-WHERE orders.id = items.orderId;
-SELECT orders.id, orders.orderNumber, items.itemName, items.quantity, items.price
-FROM orders
-LEFT JOIN items ON orders.id = items.orderId where orders.id = 4;*/
-
-/*select orders.id, orders.orderNumber, items.itemName, items.quantity, items.price from orders, items
-WHERE orders.id = items.orderId;
-SELECT orders.id, orders.orderNumber, items.itemName, items.quantity, items.price
-FROM orders
-         LEFT JOIN items ON orders.id = items.orderId*/
--- select orders.id, orders.orderNumber from orders;
 

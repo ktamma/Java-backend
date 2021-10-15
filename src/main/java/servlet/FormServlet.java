@@ -1,7 +1,5 @@
 package servlet;
 
-import connection_pool.ConnectionPool;
-import dao.OrderDao;
 import order.Order;
 
 import javax.servlet.ServletContext;
@@ -27,19 +25,19 @@ public class FormServlet extends HttpServlet {
                           HttpServletResponse response) throws IOException {
 
 
-        ServletContext context = getServletContext();
-
-        ConnectionPool pool =(ConnectionPool) context.getAttribute("ConnectionPool");
-
-        OrderDao orderDao = new OrderDao(pool);
-
-
-        Order order = new Order();
-        order.setOrderNumber(request.getParameter("orderNumber"));
-        order.setId(orderDao.insertOrder(order).getId());
-
-        response.setContentType("text/plain");
-
-        response.getWriter().print(order.getId());
+//        ServletContext context = getServletContext();
+//
+//        ConnectionPool pool =(ConnectionPool) context.getAttribute("ConnectionPool");
+//
+//        OrderDao orderDao = new OrderDao(pool);
+//
+//
+//        Order order = new Order();
+//        order.setOrderNumber(request.getParameter("orderNumber"));
+//        order.setId(orderDao.insertOrder(order).getId());
+//
+//        response.setContentType("text/plain");
+//
+//        response.getWriter().print(order.getId());
     }
 }

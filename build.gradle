@@ -2,25 +2,53 @@ plugins {
     id 'war'
     id 'java'
     id 'org.gretty' version '3.0.6'
-
 }
 
 group 'org.example'
 version '1.0-SNAPSHOT'
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 def commonsVersion = '3.12.0'
+def springVersion = '5.3.10'
+def lombokVersion = '1.18.20'
+def hsqldbVersion = '2.6.0'
+def aspectjWeaverVersion = '1.9.7'
+def postgresVersion = '42.2.24'
 
 dependencies {
+    implementation group: 'org.springframework',
+            name: 'spring-context',
+            version: springVersion
+
+    implementation group: 'org.springframework',
+            name: 'spring-jdbc',
+            version: springVersion
+
+    implementation group: 'org.springframework',
+            name: 'spring-aop',
+            version: springVersion
+
+    implementation group: 'org.aspectj',
+            name: 'aspectjweaver',
+            version: aspectjWeaverVersion
+
     implementation group: 'org.postgresql',
             name: 'postgresql',
-            version: '42.2.23'
+            version: postgresVersion
 
     implementation group: 'org.hsqldb',
             name: 'hsqldb',
-            version: '2.6.0'
+            version: hsqldbVersion
+
+    compileOnly group: 'org.projectlombok',
+            name: 'lombok',
+            version: lombokVersion
+
+    annotationProcessor group: 'org.projectlombok',
+            name: 'lombok',
+            version: lombokVersion
 
 
     implementation 'com.konghq:unirest-objectmapper-jackson:3.13.0'
@@ -31,9 +59,6 @@ dependencies {
     implementation group: 'org.apache.commons',
             name: 'commons-lang3',
             version: commonsVersion
-    compileOnly 'org.projectlombok:lombok:1.18.20'
-    annotationProcessor 'org.projectlombok:lombok:1.18.20'
-
 }
 
 test {
