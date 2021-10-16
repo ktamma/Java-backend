@@ -1,12 +1,17 @@
 package servlet;
 
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import dao.OrderDao;
 import order.Order;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 public class FormServlet extends HttpServlet {
 
@@ -25,19 +30,23 @@ public class FormServlet extends HttpServlet {
                           HttpServletResponse response) throws IOException {
 
 
-//        ServletContext context = getServletContext();
-//
-//        ConnectionPool pool =(ConnectionPool) context.getAttribute("ConnectionPool");
-//
-//        OrderDao orderDao = new OrderDao(pool);
-//
-//
-//        Order order = new Order();
-//        order.setOrderNumber(request.getParameter("orderNumber"));
-//        order.setId(orderDao.insertOrder(order).getId());
-//
-//        response.setContentType("text/plain");
-//
-//        response.getWriter().print(order.getId());
+        ServletContext context = getServletContext();
+
+        var ctx = (AnnotationConfigApplicationContext) context.getAttribute("ctx");
+
+
+        OrderDao dao = (OrderDao) context.getAttribute("dao");
+
+
+        try (ctx) {
+
+            Order order = new Order();
+            order.setOrderNumber(request.getParameter("orderNumber"));
+            order.setId(dao.insertOrder(order).getId());
+            response.setContentType("text/plain");
+
+            response.getWriter().print(order.getId());
+        }
     }
+
 }

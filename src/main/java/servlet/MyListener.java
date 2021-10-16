@@ -3,7 +3,7 @@ package servlet;
 import config.Config;
 import config.HsqlDataSource;
 
-import dao.SpringOrderDao;
+import dao.OrderDao;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.servlet.ServletContext;
@@ -12,7 +12,6 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.ServletRegistration;
 import javax.servlet.annotation.WebListener;
 
-import java.sql.SQLException;
 
 
 
@@ -45,7 +44,7 @@ public class MyListener implements ServletContextListener {
         var ctx = new AnnotationConfigApplicationContext(Config.class, HsqlDataSource.class);
         context.setAttribute("ctx", ctx);
         try (ctx) {
-            SpringOrderDao dao = ctx.getBean(SpringOrderDao.class);
+            OrderDao dao = ctx.getBean(OrderDao.class);
             context.setAttribute("dao", dao);
 
         }
