@@ -33,6 +33,7 @@ public class OrdersServlet extends HttpServlet {
 
         try (ctx) {
 
+
             response.setContentType("application/json");
             if (id == null) {
 
@@ -64,6 +65,7 @@ public class OrdersServlet extends HttpServlet {
 
 
         try (ctx) {
+
             response.setContentType("application/json");
 
             ValidationErrors errors = dao.validateOrder(order);

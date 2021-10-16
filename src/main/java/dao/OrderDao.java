@@ -4,6 +4,8 @@ import exceptions.ValidationError;
 import exceptions.ValidationErrors;
 import item.Item;
 import order.Order;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.*;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class OrderDao {
 
 
