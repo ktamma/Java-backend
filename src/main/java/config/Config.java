@@ -1,9 +1,7 @@
 package config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+
+import org.springframework.context.annotation.*;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -13,7 +11,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @PropertySource("classpath:/application.properties")
-@ComponentScan(basePackages = {"dao", "config", "servlet"})
+@ComponentScan(basePackages = {"dao", "config", "servlet", "framework"})
 public class Config {
 
 
@@ -21,5 +19,7 @@ public class Config {
     public JdbcTemplate getTemplate(DataSource ds) {
         return new JdbcTemplate(ds);
     }
+
+
 
 }

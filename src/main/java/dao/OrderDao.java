@@ -52,8 +52,6 @@ public class OrderDao {
                 insertItem(id.longValue(), item);
             }
         }
-
-
         return order;
     }
 

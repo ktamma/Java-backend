@@ -1,7 +1,6 @@
 package servlet;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import dao.OrderDao;
 import order.Order;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 public class FormServlet extends HttpServlet {
 
