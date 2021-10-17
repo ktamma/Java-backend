@@ -76,13 +76,12 @@ public class FrontController extends HttpServlet {
                 for (Method method : methods) {
                     Post annotation = method.getAnnotation(Post.class);
 
-                    if (annotation != null && Objects.equals(annotation.value(), request.getRequestURI())) {
-                        if (order.getClass() == method.getParameterTypes()[0]) {
+                    if (annotation != null && Objects.equals(annotation.value(), request.getRequestURI()) && order.getClass() == method.getParameterTypes()[0]) {
 
                             response.setContentType("application/json");
                             response.getWriter().print(new ObjectMapper().writeValueAsString(method.invoke(bean, order)));
 
-                        }
+                        
                     }
 
                 }
