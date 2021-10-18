@@ -28,10 +28,8 @@ public class OrdersServlet extends HttpServlet {
         String id = request.getParameter("id");
 
 
-        OrderDao dao = (OrderDao) context.getAttribute("dao");
+        OrderDao dao = ctx.getBean(OrderDao.class);
 
-
-        try (ctx) {
 
 
             response.setContentType("application/json");
@@ -46,7 +44,7 @@ public class OrdersServlet extends HttpServlet {
         }
 
 
-    }
+
 
     @Override
     protected void doPost(HttpServletRequest request,
@@ -61,10 +59,9 @@ public class OrdersServlet extends HttpServlet {
 
         Order order = new ObjectMapper().readValue(json, Order.class);
 
-        OrderDao dao = (OrderDao) context.getAttribute("dao");
+        OrderDao dao = ctx.getBean(OrderDao.class);
 
 
-        try (ctx) {
 
             response.setContentType("application/json");
 
@@ -80,7 +77,7 @@ public class OrdersServlet extends HttpServlet {
 
         }
 
-    }
+
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp){
@@ -93,12 +90,10 @@ public class OrdersServlet extends HttpServlet {
         var ctx = (AnnotationConfigApplicationContext) context.getAttribute("ctx");
 
 
-        OrderDao dao = (OrderDao) context.getAttribute("dao");
-        try (ctx) {
+        OrderDao dao = ctx.getBean(OrderDao.class);
 
             dao.deleteOrderById(Long.parseLong(id));
 
-        }
 
     }
 

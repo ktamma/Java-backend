@@ -33,10 +33,9 @@ public class FormServlet extends HttpServlet {
         var ctx = (AnnotationConfigApplicationContext) context.getAttribute("ctx");
 
 
-        OrderDao dao = (OrderDao) context.getAttribute("dao");
+        OrderDao dao = ctx.getBean(OrderDao.class);
 
 
-        try (ctx) {
 
             Order order = new Order();
             order.setOrderNumber(request.getParameter("orderNumber"));

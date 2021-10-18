@@ -3,9 +3,8 @@ package servlet;
 import config.Config;
 import config.HsqlDataSource;
 
-import dao.OrderDao;
+
 import framework.FrontController;
-import framework.annotations.MyController;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.servlet.ServletContext;
@@ -15,16 +14,12 @@ import javax.servlet.ServletRegistration;
 import javax.servlet.annotation.WebListener;
 
 
-
-
-
 @WebListener
 public class MyListener implements ServletContextListener {
 
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-
 
 
         ServletContext context = sce.getServletContext();
@@ -53,17 +48,6 @@ public class MyListener implements ServletContextListener {
         var ctx = new AnnotationConfigApplicationContext(Config.class, HsqlDataSource.class);
 
         context.setAttribute("ctx", ctx);
-        try (ctx) {
-            var beans = ctx.getBeansWithAnnotation(MyController.class).values();
-            context.setAttribute("beans", beans);
-
-
-
-            OrderDao dao = ctx.getBean(OrderDao.class);
-            context.setAttribute("dao", dao);
-
-        }
-
 
 
     }
