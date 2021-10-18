@@ -36,14 +36,12 @@ public class FormServlet extends HttpServlet {
         OrderDao dao = ctx.getBean(OrderDao.class);
 
 
+        Order order = new Order();
+        order.setOrderNumber(request.getParameter("orderNumber"));
+        order.setId(dao.insertOrder(order).getId());
+        response.setContentType("text/plain");
 
-            Order order = new Order();
-            order.setOrderNumber(request.getParameter("orderNumber"));
-            order.setId(dao.insertOrder(order).getId());
-            response.setContentType("text/plain");
-
-            response.getWriter().print(order.getId());
-        }
+        response.getWriter().print(order.getId());
     }
-
 }
+    
