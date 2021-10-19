@@ -1,13 +1,13 @@
 package dao;
 
-import exceptions.ValidationError;
-import exceptions.ValidationErrors;
+
 import item.Item;
 import order.Order;
 import org.springframework.jdbc.core.*;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -73,18 +73,6 @@ public class OrderDao {
         Object[] args = {id};
 
         template.update(sql, args);
-    }
-
-    public ValidationErrors validateOrder(Order order) {
-        ValidationErrors errors = new ValidationErrors();
-        List<ValidationError> errors1 = new ArrayList<>();
-        if(order.getOrderNumber().length() < 2){
-            ValidationError error = new ValidationError();
-            error.setCode("too_short_number");
-            errors1.add(error);
-        }
-        errors.setErrors(errors1);
-        return errors;
     }
 
 

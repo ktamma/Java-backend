@@ -18,6 +18,18 @@ def aspectjWeaverVersion = '1.9.7'
 def postgresVersion = '42.2.24'
 
 dependencies {
+    implementation group: 'org.hibernate',
+            name: 'hibernate-validator',
+            version: '6.2.0.Final'
+
+    implementation group: 'org.springframework',
+            name: 'spring-webmvc',
+            version: '5.3.10'
+
+    implementation group: 'org.springframework',
+            name: 'spring-jdbc',
+            version: '5.3.10'
+
     implementation group: 'org.springframework',
             name: 'spring-context',
             version: springVersion
