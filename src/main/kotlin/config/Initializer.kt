@@ -1,7 +1,6 @@
 package config
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer
-import config.MvcConfig
 
 class Initializer : AbstractAnnotationConfigDispatcherServletInitializer() {
     override fun getRootConfigClasses(): Array<Class<*>> {

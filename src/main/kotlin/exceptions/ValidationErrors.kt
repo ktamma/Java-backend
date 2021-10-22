@@ -1,8 +1,7 @@
 package exceptions
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import exceptions.ValidationError
-import lombok.Getter
+
 import org.springframework.validation.FieldError
 import org.springframework.context.support.DefaultMessageSourceResolvable
 import java.util.ArrayList

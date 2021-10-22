@@ -1,18 +1,14 @@
 package dao
 
 import org.springframework.jdbc.core.JdbcTemplate
-import dao.OrderDao.OrdersMapper
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert
-import dao.OrderDao.ItemMapper
 import org.springframework.jdbc.core.PreparedStatementSetter
 import kotlin.Throws
 import java.sql.SQLException
 import java.sql.PreparedStatement
-import dao.OrderDao.OrderMapper
 import org.springframework.jdbc.core.ResultSetExtractor
 import java.sql.ResultSet
-import dao.OrderDao
 import item.Item
 import order.Order
 import org.springframework.stereotype.Repository

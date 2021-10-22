@@ -1,8 +1,6 @@
 package util
 
-import util.ConnectionInfo
-import java.util.Properties
-import util.PropertyLoader
+
 
 object ConfigUtil {
     fun readConnectionInfo(): ConnectionInfo {
