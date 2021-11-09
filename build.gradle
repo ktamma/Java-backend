@@ -1,7 +1,7 @@
 plugins {
-    id 'war'
+//    id 'war'
+    id 'java'
     id 'org.gretty' version '3.0.6'
-    id "org.jetbrains.kotlin.jvm" version "1.5.31"
 }
 
 group 'org.example'
@@ -18,18 +18,14 @@ def aspectjWeaverVersion = '1.9.7'
 def postgresVersion = '42.2.24'
 
 dependencies {
-    implementation(group: 'com.fasterxml.jackson.module',
-            name: 'jackson-module-kotlin',
-            version: '2.13.0') {
+    implementation group: 'org.hibernate',
+            name: 'hibernate-core',
+            version: '5.5.8.Final'
 
-        exclude group: 'org.jetbrains.kotlin',
-                module: 'kotlin-reflect'
-    }
-
-    implementation group: 'org.jetbrains.kotlin',
-            name: 'kotlin-reflect',
-            version: '1.5.31'
-
+    implementation group: 'org.springframework',
+            name: 'spring-orm',
+            version: '5.3.11'
+    
     implementation group: 'org.hibernate',
             name: 'hibernate-validator',
             version: '6.2.0.Final'
