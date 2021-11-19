@@ -1,10 +1,6 @@
 package model;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -12,7 +8,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Embeddable
 @Table(name = "AUTHORITIES")
-public class Authority {
+public class Role {
     @NotNull
     private String authority;
 

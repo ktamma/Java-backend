@@ -33,7 +33,7 @@ public class User {
             joinColumns=@JoinColumn(name = "username",
                     referencedColumnName = "username")
     )
-    private List<Authority> authorities;
+    private List<Role> authorities;
 }
 //    username   VARCHAR(255) NOT NULL PRIMARY KEY,
 //    password   VARCHAR(255) NOT NULL,

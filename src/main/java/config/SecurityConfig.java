@@ -1,12 +1,12 @@
 package config;
 
-import config.security.ApiAuthenticationFilter;
 import config.security.handlers.ApiAccessDeniedHandler;
 import config.security.handlers.ApiEntryPoint;
 import config.security.handlers.ApiLogoutSuccessHandler;
 import config.security.jwt.JwtAuthenticationFilter;
 import config.security.jwt.JwtAuthorizationFilter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -22,6 +22,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 @PropertySource("classpath:/application.properties")
+@ComponentScan
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${jwt.signing.key}")

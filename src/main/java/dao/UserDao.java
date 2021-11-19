@@ -1,6 +1,5 @@
 package dao;
 
-import model.Order;
 import model.User;
 import org.springframework.stereotype.Repository;
 

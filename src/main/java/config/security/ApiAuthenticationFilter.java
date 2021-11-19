@@ -14,7 +14,6 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class ApiAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
