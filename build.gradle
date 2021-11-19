@@ -16,8 +16,31 @@ def lombokVersion = '1.18.20'
 def hsqldbVersion = '2.6.0'
 def aspectjWeaverVersion = '1.9.7'
 def postgresVersion = '42.2.24'
+def jsonWebTokenVersion = '0.11.2'
+
 
 dependencies {
+
+    implementation group: 'org.springframework.security',
+            name: 'spring-security-web',
+            version: '5.5.1'
+
+    implementation group: 'org.springframework.security',
+            name: 'spring-security-config',
+            version: '5.5.1'
+
+    implementation group: 'io.jsonwebtoken',
+            name: 'jjwt-api',
+            version: jsonWebTokenVersion
+
+    implementation group: 'io.jsonwebtoken',
+            name: 'jjwt-impl',
+            version: jsonWebTokenVersion
+
+    implementation group: 'io.jsonwebtoken',
+            name: 'jjwt-jackson',
+            version: jsonWebTokenVersion
+
     implementation group: 'org.hibernate',
             name: 'hibernate-core',
             version: '5.5.8.Final'

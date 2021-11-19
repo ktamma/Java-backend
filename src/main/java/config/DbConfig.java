@@ -20,7 +20,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = {"dao"})
+@ComponentScan(basePackages = {"dao", "config"})
 @PropertySource("classpath:/application.properties")
 public class DbConfig {
 

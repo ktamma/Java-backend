@@ -1,12 +1,9 @@
--- insert into orders(ordernumber) values ('abc');
--- insert into orders(ordernumber) values ('123');
--- insert into orders(ordernumber) values ('ddd');
--- insert into orders(ordernumber) values ('ccc');
--- insert into orders(ordernumber) values ('fff');
--- insert into orders(ordernumber) values ('ggg');
--- insert into orders(ordernumber) values ('hhh');
---
---
--- insert into items(orderid, itemname, quantity, price)  values(1, 'asdasd', 2, 5);
--- insert into items(orderid, itemname, quantity, price)  values(1, 'sadasd', 2, 5);
-select 1;
+INSERT INTO users (USERNAME, PASSWORD, ENABLED, FIRST_NAME)
+VALUES ('user', '$2a$10$BRaNrwxklcU6t.i87r3wbugGHIQoBgkz9cM8dHm5SJEWwhUjROk3C', true, 'Jack');
+INSERT INTO users (USERNAME, PASSWORD, ENABLED, FIRST_NAME)
+VALUES ('admin', '$2a$10$EjkaDYMdT11QFAiIAwTuWelEXo2viLxlTOaLEswlhe9VyyMmmXpay', true, 'Jill');
+INSERT INTO AUTHORITIES (USERNAME, AUTHORITY)
+VALUES ('user', 'ROLE_USER');
+INSERT INTO AUTHORITIES (USERNAME, AUTHORITY)
+VALUES ('admin', 'ROLE_ADMIN');
+-- select 1;
